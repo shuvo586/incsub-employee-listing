@@ -7,12 +7,12 @@ final class EmployeeListing {
 	use Singleton;
 
 	public function __construct() {
-		//add_action( 'init', [ $this, 'register_shortcodes' ] );
+		add_action( 'init', [ $this, 'register_shortcodes' ] );
 		add_action( 'rest_api_init', [ $this, 'register_rest_routes' ] );
 	}
 
 	public function register_shortcodes() {
-		Shortcodes::get_instance()->register();
+		Shortcodes::init();
 	}
 
 	public static function activate() {
@@ -59,7 +59,7 @@ final class EmployeeListing {
 	}
 
 	public function register_rest_routes() {
-		RestApi::get_instance()->register_routes();
+		RestRoute::init();
 	}
 }
 
