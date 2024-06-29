@@ -35,3 +35,41 @@ if ( ! defined( 'INCSUB_EMPLOYEE_LISTING_URL' ) ) {
 if ( ! defined( 'CARTICK_ASSETS' ) ) {
 	define( 'CARTICK_ASSETS', INCSUB_EMPLOYEE_LISTING_URL . '/assets' );
 }
+
+/**
+ * Composer autoload
+ */
+
+if ( file_exists( INCSUB_EMPLOYEE_LISTING_DIR . '/vendor/autoload.php' ) ) {
+
+	require_once __DIR__ . '/vendor/autoload.php';
+
+	/**
+	 * Plugin Initializer.
+	 */
+	function employeeListing() {
+		//return Incsub\EmployeeListing\EmployeeListing::init();
+	}
+	// Initialize.
+	employeeListing();
+
+	function incsub_employee_listing_init() {
+		Incsub\EmployeeListing\EmployeeListing::init();
+	}
+	add_action( 'plugins_loaded', 'incsub_employee_listing_init' );
+
+	register_activation_hook( __FILE__, [ 'Incsub\EmployeeListing\EmployeeListing', 'activate' ] );
+	register_deactivation_hook( __FILE__, [ 'Incsub\EmployeeListing\EmployeeListing', 'deactivate' ] );
+
+} else {
+	add_action(
+		'admin_notices',
+		function () {
+			?>
+			<div class="notice notice-error notice-alt">
+				<p><?php esc_html_e( 'Cannot initialize “Employee Listing” plugin. <code>vendor/autoload.php</code> is missing. Please run <code>composer dump-autoload -o</code> within the this plugin directory.', 'cartick' ); ?></p>
+			</div>
+			<?php
+		}
+	);
+}

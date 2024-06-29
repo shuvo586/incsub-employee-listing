@@ -1,10 +1,10 @@
 {
     "name": "shuvo/incsub-employee-listing",
     "description": "A example plugin to manage employee data in a custom table for Incsub Task.",
-    "license": "gplv2",
+    "license": "GPL-2.0-or-later",
     "autoload": {
         "psr-4": {
-            "Shuvo\\IncsubEmployeeListing\\": "includes/"
+            "Incsub\\EmployeeListing\\": "includes/"
         }
     },
     "authors": [
