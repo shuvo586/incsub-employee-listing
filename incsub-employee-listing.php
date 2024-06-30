@@ -5,7 +5,7 @@
 * Description:  A example plugin to manage employee data in a custom table for Incsub Task.
 * Version:      1.0.0
 * Requires      at least: 5.0
-* Requires PHP: 7.4
+* Requires PHP: 7.2
 * Author:       Faisal Hossain Shuvo
 * Author URI:   https://faisalshuvo.com
 * License:      GPLv2 or later
@@ -29,11 +29,11 @@ if ( ! defined( 'INCSUB_EMPLOYEE_LISTING_DIR' ) ) {
 }
 
 if ( ! defined( 'INCSUB_EMPLOYEE_LISTING_URL' ) ) {
-	define( 'INCSUB_EMPLOYEE_LISTING_URL', plugins_url( 'cartick' ) );
+	define( 'INCSUB_EMPLOYEE_LISTING_URL', plugins_url( 'incsub-employee-listing' ) );
 }
 
-if ( ! defined( 'CARTICK_ASSETS' ) ) {
-	define( 'CARTICK_ASSETS', INCSUB_EMPLOYEE_LISTING_URL . '/assets' );
+if ( ! defined( 'INCSUB_EMPLOYEE_LISTING_ASSETS' ) ) {
+	define( 'INCSUB_EMPLOYEE_LISTING_ASSETS', INCSUB_EMPLOYEE_LISTING_URL . '/assets' );
 }
 
 /**
@@ -47,19 +47,13 @@ if ( file_exists( INCSUB_EMPLOYEE_LISTING_DIR . '/vendor/autoload.php' ) ) {
 	/**
 	 * Plugin Initializer.
 	 */
-	function employeeListing() {
-		//return Incsub\EmployeeListing\EmployeeListing::init();
-	}
-	// Initialize.
-	employeeListing();
-
 	function incsub_employee_listing_init() {
 		Incsub\EmployeeListing\EmployeeListing::init();
 	}
 	add_action( 'plugins_loaded', 'incsub_employee_listing_init' );
 
-	register_activation_hook( __FILE__, [ 'Incsub\EmployeeListing\EmployeeListing', 'activate' ] );
-	register_deactivation_hook( __FILE__, [ 'Incsub\EmployeeListing\EmployeeListing', 'deactivate' ] );
+	register_activation_hook( INCSUB_EMPLOYEE_LISTING_FILE, [ 'Incsub\EmployeeListing\EmployeeListing', 'activate' ] );
+	register_deactivation_hook( INCSUB_EMPLOYEE_LISTING_FILE, [ 'Incsub\EmployeeListing\EmployeeListing', 'deactivate' ] );
 
 } else {
 	add_action(

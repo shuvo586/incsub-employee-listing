@@ -40,6 +40,10 @@ class Shortcodes {
 		$data = self::get_table_data();
 		ob_start();
 		?>
+        <form id="employee-search-form">
+            <input type="text" id="employee-search" name="employee_search" placeholder="Search Employees">
+            <input type="submit" value="Search">
+        </form>
 		<table>
 			<thead>
 			<tr>
@@ -50,7 +54,7 @@ class Shortcodes {
 				<th>Created At</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody class="employee-lists">
 			<?php foreach ( $data as $row ) : ?>
 				<tr>
 					<td><?php echo esc_html( $row->id ); ?></td>
@@ -64,6 +68,13 @@ class Shortcodes {
 		</table>
 		<?php
 		return ob_get_clean();
+	}
+
+	public static function search_table_data( $query ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'incsub_employees';
+		$sql = $wpdb->prepare( "SELECT * FROM $table_name WHERE name LIKE %s OR email LIKE %s", '%' . $wpdb->esc_like( $query ) . '%', '%' . $wpdb->esc_like( $query ) . '%' );
+		return $wpdb->get_results( $sql );
 	}
 
 	public static function get_table_data() {
