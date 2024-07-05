@@ -4,6 +4,8 @@ It is a simple employee listing plugin
 ## Install
 - Download the plugin into your plugins directory 
 - Enable in the WordPress admin
+- Insert `[incsub_employee_form]` to show Employee form
+- Inster `[incsub_employee_list]` to show Employee list
 
 ## Requirements
 - Run `yarn install` *Requires node 18.12.0 or newer version*
