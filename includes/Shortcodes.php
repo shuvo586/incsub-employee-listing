@@ -79,6 +79,7 @@ class Shortcodes {
 						<form id="employee-search-form" class="flex space-x-2">
 							<label for="employee-search" class="sr-only"><?php esc_html_e( 'Search Employees', 'incsub-employee-listing' ); ?></label>
 							<input type="text" id="employee-search" name="employee_search" placeholder="Search Employees" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+							<input type="hidden" name="incsub_nonce" value="<?php echo esc_attr( wp_create_nonce( 'incsub_nonce' ) ); ?> ">
 							<input type="submit" value="Search" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
 						</form>
 					</div>
@@ -123,7 +124,8 @@ class Shortcodes {
 	public static function search_table_data( $query ) {
 		// phpcs:disable
 		global $wpdb;
-		return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s WHERE name LIKE %s OR email LIKE %s", $wpdb->prefix . 'incsub_employees', '%' . $wpdb->esc_like( $query ) . '%', '%' . $wpdb->esc_like( $query ) . '%' ) );
+		$sql = $wpdb->prepare( "SELECT * FROM %s WHERE name LIKE %s OR email LIKE %s", $wpdb->prefix . 'incsub_employees', '%' . $wpdb->esc_like( $query ) . '%', '%' . $wpdb->esc_like( $query ) . '%' );
+		return $wpdb->get_results( $sql );
         // phpcs:enable
 	}
 

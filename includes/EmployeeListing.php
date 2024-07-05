@@ -133,10 +133,15 @@ final class EmployeeListing {
 	 * @return void
 	 */
 	public function employee_search() {
-		if ( empty( $_POST['query'] ) ) {
-			return;
+		if ( ! isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( sanitize_text_field( $_POST['_wpnonce'] ), 'incsub_nonce' ) ) {
+			exit( 'No naughty business please' );
 		}
-		$query   = wp_verify_nonce( sanitize_text_field( wp_unslash ( $_POST['query'] ) ) );
+
+		if ( empty( $_POST['query'] ) ) {
+			exit( 'No query string provided' );
+		}
+
+		$query   = sanitize_text_field( $_POST['query'] );
 		$results = Shortcodes::search_table_data( $query );
 		if ( ! empty( $results ) ) : ?>
 			<table class="table-auto min-w-full bg-white employee-lists__wrap">
@@ -174,13 +179,15 @@ final class EmployeeListing {
 	 * @return void
 	 */
 	function submit_employee() {
+		if ( ! isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( sanitize_text_field( $_POST['_wpnonce'] ), 'incsub_nonce' ) ) {
+			exit( 'No naughty business please' );
+		}
 
 		if ( empty( $_POST['formData'] ) ) {
-			return;
+			exit( 'No form data provided.' );
 		}
-		check_ajax_referer('incsub_nonce', 'security');
 
-		parse_str( wp_verify_nonce( sanitize_text_field( wp_unslash ( $_POST['formData'] ) ) ), $form_fields);
+		parse_str( sanitize_text_field( $_POST['formData'] ), $form_fields);
 
 		$employee_name  = sanitize_text_field( $form_fields['employee_name'] );
 		$employee_email = sanitize_email( $form_fields['employee_email'] );
