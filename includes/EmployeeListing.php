@@ -10,11 +10,11 @@ final class EmployeeListing {
 	 * EmployeeListing Constructor
 	 */
 	public function __construct() {
-		add_action( 'init', [ $this, 'register_shortcodes' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-		add_action( 'rest_api_init', [ $this, 'register_rest_routes' ] );
-		add_action( 'wp_ajax_incsub_employee_search', [ $this, 'employee_search' ] );
-		add_action( 'wp_ajax_nopriv_incsub_employee_search', [ $this, 'employee_search' ] );
+		add_action( 'init', array( $this, 'register_shortcodes' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
+		add_action( 'wp_ajax_incsub_employee_search', array( $this, 'employee_search' ) );
+		add_action( 'wp_ajax_nopriv_incsub_employee_search', array( $this, 'employee_search' ) );
 	}
 
 	/**
@@ -24,10 +24,14 @@ final class EmployeeListing {
 	 */
 	function enqueue_scripts() {
 		wp_enqueue_style( 'incsub-employee-listing', INCSUB_EMPLOYEE_LISTING_ASSETS . '/dist/css/styles.css', '', '1.0.0' );
-		wp_enqueue_script( 'incsub-employee-listing-ajax', INCSUB_EMPLOYEE_LISTING_ASSETS . '/dist/js/script.js', [ 'jquery' ], '1.0.0', true );
-		wp_localize_script( 'incsub-employee-listing-ajax', 'incsub_ajax_object', [
-			'ajax_url' => admin_url( 'admin-ajax.php' )
-		] );
+		wp_enqueue_script( 'incsub-employee-listing-ajax', INCSUB_EMPLOYEE_LISTING_ASSETS . '/dist/js/script.js', array( 'jquery' ), '1.0.0', true );
+		wp_localize_script(
+			'incsub-employee-listing-ajax',
+			'incsub_ajax_object',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+			)
+		);
 	}
 
 	/**
@@ -118,9 +122,9 @@ final class EmployeeListing {
 	 * @return void
 	 */
 	public function employee_search() {
-		$query = sanitize_text_field( $_POST['query'] );
+		$query   = sanitize_text_field( $_POST['query'] );
 		$results = Shortcodes::search_table_data( $query );
-		if ( !empty( $results ) ) : ?>
+		if ( ! empty( $results ) ) : ?>
 			<table class="table-auto min-w-full bg-white employee-lists__wrap">
 			<thead>
 			<tr>
@@ -141,11 +145,12 @@ final class EmployeeListing {
 					<td class="py-2 px-4 text-left"><?php echo esc_html( $row->hire_date ); ?></td>
 				</tr>
 			<?php endforeach; ?>
-		<?php else: ?>
+		<?php else : ?>
 			<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
 				<p><?php esc_html_e( 'No results found.', 'incsub-employee-listing' ); ?></p>
 			</div>
-		<?php endif;
+			<?php
+		endif;
 		wp_die();
 	}
 }

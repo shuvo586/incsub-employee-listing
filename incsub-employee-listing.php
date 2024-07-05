@@ -14,7 +14,9 @@
 * Domain Path:  /languages
 */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! defined( 'INCSUB_EMPLOYEE_LISTING_VERSION' ) ) {
 	define( 'INCSUB_EMPLOYEE_LISTING_VERSION', '1.0.0' );
@@ -41,7 +43,6 @@ if ( ! defined( 'INCSUB_EMPLOYEE_LISTING_ASSETS' ) ) {
  */
 
 if ( file_exists( INCSUB_EMPLOYEE_LISTING_DIR . '/vendor/autoload.php' ) ) {
-
 	require_once __DIR__ . '/vendor/autoload.php';
 
 	/**
@@ -52,9 +53,8 @@ if ( file_exists( INCSUB_EMPLOYEE_LISTING_DIR . '/vendor/autoload.php' ) ) {
 	}
 	add_action( 'plugins_loaded', 'incsub_employee_listing_init' );
 
-	register_activation_hook( INCSUB_EMPLOYEE_LISTING_FILE, [ 'Incsub\EmployeeListing\EmployeeListing', 'activate' ] );
-	register_deactivation_hook( INCSUB_EMPLOYEE_LISTING_FILE, [ 'Incsub\EmployeeListing\EmployeeListing', 'deactivate' ] );
-
+	register_activation_hook( INCSUB_EMPLOYEE_LISTING_FILE, array( 'Incsub\EmployeeListing\EmployeeListing', 'activate' ) );
+	register_deactivation_hook( INCSUB_EMPLOYEE_LISTING_FILE, array( 'Incsub\EmployeeListing\EmployeeListing', 'deactivate' ) );
 } else {
 	add_action(
 		'admin_notices',

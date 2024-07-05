@@ -8,7 +8,9 @@
 
 namespace Incsub\EmployeeListing\Traits;
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 trait Singleton {
 	/**
