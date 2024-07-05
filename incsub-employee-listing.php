@@ -61,7 +61,7 @@ if ( file_exists( INCSUB_EMPLOYEE_LISTING_DIR . '/vendor/autoload.php' ) ) {
 		function () {
 			?>
 			<div class="notice notice-error notice-alt">
-				<p><?php esc_html_e( 'Cannot initialize “Employee Listing” plugin. <code>vendor/autoload.php</code> is missing. Please run <code>composer dump-autoload -o</code> within the this plugin directory.', 'cartick' ); ?></p>
+				<p><?php esc_html_e( 'Cannot initialize “Employee Listing” plugin. <code>vendor/autoload.php</code> is missing. Please run <code>composer dump-autoload -o</code> within the this plugin directory.', 'incsub-employee-listing' ); ?></p>
 			</div>
 			<?php
 		}

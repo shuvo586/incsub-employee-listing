@@ -44,11 +44,9 @@ class RestRoute {
 	/**
 	 * Get employee list
 	 *
-	 * @param \WP_REST_Request $request
-	 *
 	 * @return \WP_REST_Response
 	 */
-	public function get_employees( \WP_REST_Request $request ) {
+	public function get_employees() {
 		$data = Shortcodes::get_table_data();
 		return new \WP_REST_Response( $data, 200 );
 	}
