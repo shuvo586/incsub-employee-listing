@@ -19,7 +19,7 @@ jQuery(document).ready(function($) {
                 query: searchQuery
             },
             success: function(response) {
-                $('.employee-lists').html(response);
+                $('.employee-lists__wrap').html(response);
             }
         });
     });

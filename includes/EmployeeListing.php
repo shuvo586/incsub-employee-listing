@@ -78,6 +78,7 @@ final class EmployeeListing {
 	            id mediumint(9) NOT NULL AUTO_INCREMENT,
 	            name varchar(255) NOT NULL,
 	            email varchar(255) NOT NULL,
+	            designation varchar(255) NOT NULL,
 	            hire_date date NOT NULL,
 	            created_at datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	            PRIMARY KEY  (id)
@@ -119,19 +120,32 @@ final class EmployeeListing {
 	public function employee_search() {
 		$query = sanitize_text_field( $_POST['query'] );
 		$results = Shortcodes::search_table_data( $query );
-		if ( !empty( $results ) ) {
-			foreach ( $results as $row ) {
-				echo '<tr class="border-t">';
-				echo '<td class="py-2 px-4">' . esc_html( $row->id ) . '</td>';
-				echo '<td class="py-2 px-4">' . esc_html( $row->name ) . '</td>';
-				echo '<td class="py-2 px-4">' . esc_html( $row->email ) . '</td>';
-				echo '<td class="py-2 px-4">' . esc_html( $row->hire_date ) . '</td>';
-				echo '<td class="py-2 px-4">' . esc_html( $row->created_at ) . '</td>';
-				echo '</tr>';
-			}
-		} else {
-			echo '<p>No results found.</p>';
-		}
+		if ( !empty( $results ) ) : ?>
+			<table class="table-auto min-w-full bg-white employee-lists__wrap">
+			<thead>
+			<tr>
+				<th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'ID', 'incsub-employee-listing' ); ?></th>
+				<th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Name', 'incsub-employee-listing' ); ?></th>
+				<th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Email', 'incsub-employee-listing' ); ?></th>
+				<th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Designation', 'incsub-employee-listing' ); ?></th>
+				<th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Hire Date', 'incsub-employee-listing' ); ?></th>
+			</tr>
+			</thead>
+			<tbody class="employee-lists">
+			<?php foreach ( $results as $row ) : ?>
+				<tr class="border-t">
+					<td class="py-2 px-4"><?php echo esc_html( $row->id ); ?></td>
+					<td class="py-2 px-4"><?php echo esc_html( $row->name ); ?></td>
+					<td class="py-2 px-4"><?php echo esc_html( $row->email ); ?></td>
+					<td class="py-2 px-4"><?php echo esc_html( $row->designation ); ?></td>
+					<td class="py-2 px-4"><?php echo esc_html( $row->hire_date ); ?></td>
+				</tr>
+			<?php endforeach; ?>
+		<?php else: ?>
+			<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+				<p><?php esc_html_e( 'No results found.', 'incsub-employee-listing' ); ?></p>
+			</div>
+		<?php endif;
 		wp_die();
 	}
 }

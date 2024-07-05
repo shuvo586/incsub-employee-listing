@@ -33,9 +33,10 @@ class RestRoute {
 	public function insert_employee( \WP_REST_Request $request ) {
 		$name = sanitize_text_field( $request->get_param( 'name' ) );
 		$email = sanitize_email( $request->get_param( 'email' ) );
+		$designation = sanitize_text_field( $request->get_param( 'designation' ) );
 		$hire_date = sanitize_text_field( $request->get_param( 'hire_date' ) );
-		if ( !empty( $name ) && !empty( $email ) && !empty( $hire_date ) ) {
-			Shortcodes::insert_data_to_table( $name, $email, $hire_date );
+		if ( !empty( $name ) && !empty( $email ) && !empty( $designation ) && !empty( $hire_date )) {
+			Shortcodes::insert_data_to_table( $name, $email, $designation, $hire_date );
 			return new \WP_REST_Response( 'Employee data inserted', 201 );
 		}
 		return new \WP_REST_Response( 'Invalid data', 400 );
