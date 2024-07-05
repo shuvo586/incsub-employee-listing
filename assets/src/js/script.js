@@ -29,15 +29,19 @@ jQuery(document).ready(function($) {
     $('#employee-submit-form').on('submit', function(e) {
         e.preventDefault();
 
-        let formData = $(this).serialize(); // Serialize form data
+        let formData = $(this).serializeArray();
+        let data = {};
+        $.each(formData, function(index, field) {
+            data[field.name] = field.value;
+        });
 
         $.ajax({
             url: incsub_ajax_object.ajax_url,
             type: 'POST',
             data: {
-                action: 'incsub_submit_employee', // Action name to trigger the PHP function
-                formData: formData,
-                nonce: incsub_ajax_object.ajax_nonce // Nonce for security
+                action: 'incsub_submit_employee',
+                data,
+                nonce: incsub_ajax_object.ajax_nonce
             },
             success: function(response) {
                 $('.form-message').html('<div class="mb-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert"><strong class="font-bold">Success!</strong><span class="block sm:inline"> ' + response + '</span></div>');

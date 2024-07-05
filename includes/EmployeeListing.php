@@ -175,16 +175,14 @@ final class EmployeeListing {
 			exit( '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert"><strong class="font-bold">Error!</strong><span class="block sm:inline"> No naughty business please</span></div>' );
 		}
 
-		if ( empty( $_POST['formData'] ) ) {
+		if ( empty( $_POST['data'] ) ) {
 			exit( '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert"><strong class="font-bold">Error!</strong><span class="block sm:inline"> No form data provided.</span></div>' );
 		}
 
-		parse_str( sanitize_text_field( $_POST['formData'] ), $form_fields);
-
-		$employee_name  = sanitize_text_field( $form_fields['employee_name'] );
-		$employee_email = sanitize_email( $form_fields['employee_email'] );
-		$designation    = sanitize_text_field( $form_fields['designation'] );
-		$hire_date      = sanitize_text_field( $form_fields['hire_date'] );
+		$employee_name  = ! empty( $_POST['data']['employee_name'] ) ? sanitize_text_field( $_POST['data']['employee_name'] ) : '';
+		$employee_email = ! empty( $_POST['data']['employee_email'] ) ? sanitize_email( $_POST['data']['employee_email'] ) : '';
+		$designation    = ! empty( $_POST['data']['designation'] ) ? sanitize_text_field( $_POST['data']['designation'] ) : '';
+		$hire_date      = ! empty( $_POST['data']['hire_date'] ) ? sanitize_text_field( $_POST['data']['hire_date'] ) : '';
 
 		$data = Shortcodes::insert_employee_data($employee_name, $employee_email, $designation, $hire_date);
 
