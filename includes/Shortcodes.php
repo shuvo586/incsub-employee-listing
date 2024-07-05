@@ -79,21 +79,21 @@ class Shortcodes {
                         <table class="table-auto min-w-full bg-white employee-lists__wrap">
                             <thead>
                             <tr>
-                                <th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'ID', 'incsub-employee-listing' ); ?></th>
-                                <th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Name', 'incsub-employee-listing' ); ?></th>
-                                <th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Email', 'incsub-employee-listing' ); ?></th>
-                                <th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Designation', 'incsub-employee-listing' ); ?></th>
-                                <th class="py-2 px-4 bg-gray-200"><?php esc_html_e( 'Hire Date', 'incsub-employee-listing' ); ?></th>
+                                <th class="py-2 px-4 bg-gray-200 text-left"><?php esc_html_e( 'ID', 'incsub-employee-listing' ); ?></th>
+                                <th class="py-2 px-4 bg-gray-200 text-left"><?php esc_html_e( 'Name', 'incsub-employee-listing' ); ?></th>
+                                <th class="py-2 px-4 bg-gray-200 text-left"><?php esc_html_e( 'Email', 'incsub-employee-listing' ); ?></th>
+                                <th class="py-2 px-4 bg-gray-200 text-left"><?php esc_html_e( 'Designation', 'incsub-employee-listing' ); ?></th>
+                                <th class="py-2 px-4 bg-gray-200 text-left"><?php esc_html_e( 'Hire Date', 'incsub-employee-listing' ); ?></th>
                             </tr>
                             </thead>
                             <tbody class="employee-lists">
 				            <?php foreach ( $data as $row ) : ?>
                                 <tr class="border-t">
-                                    <td class="py-2 px-4"><?php echo esc_html( $row->id ); ?></td>
-                                    <td class="py-2 px-4"><?php echo esc_html( $row->name ); ?></td>
-                                    <td class="py-2 px-4"><?php echo esc_html( $row->email ); ?></td>
-                                    <td class="py-2 px-4"><?php echo esc_html( $row->designation ); ?></td>
-                                    <td class="py-2 px-4"><?php echo esc_html( $row->hire_date ); ?></td>
+                                    <td class="py-2 px-4 text-left"><?php echo esc_html( $row->id ); ?></td>
+                                    <td class="py-2 px-4 text-left"><?php echo esc_html( $row->name ); ?></td>
+                                    <td class="py-2 px-4 text-left"><?php echo esc_html( $row->email ); ?></td>
+                                    <td class="py-2 px-4 text-left"><?php echo esc_html( $row->designation ); ?></td>
+                                    <td class="py-2 px-4 text-left"><?php echo esc_html( $row->hire_date ); ?></td>
                                 </tr>
 				            <?php endforeach; ?>
                             </tbody>
