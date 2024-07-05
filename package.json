@@ -1,0 +1,23 @@
+{
+  "name": "incsub-employee-listing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Faisal Hossain Shuvo <contact@faisalshuvo.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "wp-scripts build && npx tailwindcss -i ./assets/src/css/styles.css -o ./assets/dist/css/styles.css && npm run composer:build && npm run wp:i18n",
+    "composer:build": "composer install --no-dev && composer dump-autoload -o",
+    "wp:i18n": "wp i18n make-pot .",
+    "start": "wp-scripts start",
+    "tailwind": "npx tailwindcss -i ./assets/src/css/styles.css -o ./assets/dist/css/styles.css --watch"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^28.2.0",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^9.5.15",
+    "style-loader": "^4.0.0",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^3.4.4"
+  },
+  "dependencies": {}
+}

@@ -44,28 +44,30 @@ class Shortcodes {
             <input type="text" id="employee-search" name="employee_search" placeholder="Search Employees">
             <input type="submit" value="Search">
         </form>
-		<table>
-			<thead>
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Hire Date</th>
-				<th>Created At</th>
-			</tr>
-			</thead>
-			<tbody class="employee-lists">
-			<?php foreach ( $data as $row ) : ?>
-				<tr>
-					<td><?php echo esc_html( $row->id ); ?></td>
-					<td><?php echo esc_html( $row->name ); ?></td>
-					<td><?php echo esc_html( $row->email ); ?></td>
-					<td><?php echo esc_html( $row->hire_date ); ?></td>
-					<td><?php echo esc_html( $row->created_at ); ?></td>
-				</tr>
-			<?php endforeach; ?>
-			</tbody>
-		</table>
+        <div class="overflow-x-auto border">
+            <table class="table-auto min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-4 bg-gray-200">ID</th>
+                        <th class="py-2 px-4 bg-gray-200">Name</th>
+                        <th class="py-2 px-4 bg-gray-200">Email</th>
+                        <th class="py-2 px-4 bg-gray-200">Hire Date</th>
+                        <th class="py-2 px-4 bg-gray-200">Created At</th>
+                    </tr>
+                </thead>
+                <tbody class="employee-lists">
+		        <?php foreach ( $data as $row ) : ?>
+                    <tr class="border-t">
+                        <td class="py-2 px-4"><?php echo esc_html( $row->id ); ?></td>
+                        <td class="py-2 px-4"><?php echo esc_html( $row->name ); ?></td>
+                        <td class="py-2 px-4"><?php echo esc_html( $row->email ); ?></td>
+                        <td class="py-2 px-4"><?php echo esc_html( $row->hire_date ); ?></td>
+                        <td class="py-2 px-4"><?php echo esc_html( $row->created_at ); ?></td>
+                    </tr>
+		        <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
 		<?php
 		return ob_get_clean();
 	}

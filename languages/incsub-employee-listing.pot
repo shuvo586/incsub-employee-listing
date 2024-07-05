@@ -1,0 +1,43 @@
+# Copyright (C) 2024 Faisal Hossain Shuvo
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Employee Listing 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/incsub-employee-listing\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-07-05T03:07:50+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: incsub-employee-listing\n"
+
+#. Plugin Name of the plugin
+msgid "Employee Listing"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://incsub.com/employee-listing"
+msgstr ""
+
+#. Description of the plugin
+msgid "A example plugin to manage employee data in a custom table for Incsub Task."
+msgstr ""
+
+#. Author of the plugin
+msgid "Faisal Hossain Shuvo"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://faisalshuvo.com"
+msgstr ""
+
+#: includes/Traits/Singleton.php:44
+msgid "Cloning is forbidden."
+msgstr ""
+
+#: includes/Traits/Singleton.php:51
+msgid "Un-serializing instances of this class is forbidden."
+msgstr ""

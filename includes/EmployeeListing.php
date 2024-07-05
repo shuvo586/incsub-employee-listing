@@ -23,7 +23,8 @@ final class EmployeeListing {
 	 * @return void
 	 */
 	function enqueue_scripts() {
-		wp_enqueue_script( 'incsub-employee-listing-ajax', INCSUB_EMPLOYEE_LISTING_ASSETS . '/js/script.js', [ 'jquery' ], '1.0.0', true );
+		wp_enqueue_style( 'incsub-employee-listing', INCSUB_EMPLOYEE_LISTING_ASSETS . '/dist/css/styles.css', '', '1.0.0' );
+		wp_enqueue_script( 'incsub-employee-listing-ajax', INCSUB_EMPLOYEE_LISTING_ASSETS . '/dist/js/script.js', [ 'jquery' ], '1.0.0', true );
 		wp_localize_script( 'incsub-employee-listing-ajax', 'incsub_ajax_object', [
 			'ajax_url' => admin_url( 'admin-ajax.php' )
 		] );
@@ -120,12 +121,12 @@ final class EmployeeListing {
 		$results = Shortcodes::search_table_data( $query );
 		if ( !empty( $results ) ) {
 			foreach ( $results as $row ) {
-				echo '<tr>';
-				echo '<td>' . esc_html( $row->id ) . '</td>';
-				echo '<td>' . esc_html( $row->name ) . '</td>';
-				echo '<td>' . esc_html( $row->email ) . '</td>';
-				echo '<td>' . esc_html( $row->hire_date ) . '</td>';
-				echo '<td>' . esc_html( $row->created_at ) . '</td>';
+				echo '<tr class="border-t">';
+				echo '<td class="py-2 px-4">' . esc_html( $row->id ) . '</td>';
+				echo '<td class="py-2 px-4">' . esc_html( $row->name ) . '</td>';
+				echo '<td class="py-2 px-4">' . esc_html( $row->email ) . '</td>';
+				echo '<td class="py-2 px-4">' . esc_html( $row->hire_date ) . '</td>';
+				echo '<td class="py-2 px-4">' . esc_html( $row->created_at ) . '</td>';
 				echo '</tr>';
 			}
 		} else {
