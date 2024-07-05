@@ -15,8 +15,8 @@ final class EmployeeListing {
 		add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 		add_action( 'wp_ajax_incsub_employee_search', array( $this, 'employee_search' ) );
 		add_action( 'wp_ajax_nopriv_incsub_employee_search', array( $this, 'employee_search' ) );
-		add_action('wp_ajax_incsub_submit_employee', array( $this, 'submit_employee' ) );
-		add_action('wp_ajax_nopriv_incsub_submit_employee', array( $this, 'submit_employee' ) );
+		add_action('wp_ajax_incsub_submit_employee', array( $this, 'employee_submit' ) );
+		add_action('wp_ajax_nopriv_incsub_submit_employee', array( $this, 'employee_submit' ) );
 	}
 
 	/**
@@ -120,25 +120,17 @@ final class EmployeeListing {
 	}
 
 	/**
-	 * Handle AJAX Employee submit
-	 *
-	 * @return void
-	 */
-	public function employee_submit() {
-	}
-
-	/**
 	 * Handle AJAX Employee Search
 	 *
 	 * @return void
 	 */
 	public function employee_search() {
-		if ( ! isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( sanitize_text_field( $_POST['_wpnonce'] ), 'incsub_nonce' ) ) {
-			exit( 'No naughty business please' );
+		if ( ! isset( $_POST['nonce'] ) && ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'incsub_nonce' ) ) {
+			exit( '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert"><strong class="font-bold">Error!</strong><span class="block sm:inline"> No naughty business please</span></div>' );
 		}
 
 		if ( empty( $_POST['query'] ) ) {
-			exit( 'No query string provided' );
+			exit( '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert"><strong class="font-bold">Error!</strong><span class="block sm:inline"> No query string provided</span></div>' );
 		}
 
 		$query   = sanitize_text_field( $_POST['query'] );
@@ -178,13 +170,13 @@ final class EmployeeListing {
 	 *
 	 * @return void
 	 */
-	function submit_employee() {
-		if ( ! isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( sanitize_text_field( $_POST['_wpnonce'] ), 'incsub_nonce' ) ) {
-			exit( 'No naughty business please' );
+	function employee_submit() {
+		if ( ! isset( $_POST['nonce'] ) && ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'incsub_nonce' ) ) {
+			exit( '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert"><strong class="font-bold">Error!</strong><span class="block sm:inline"> No naughty business please</span></div>' );
 		}
 
 		if ( empty( $_POST['formData'] ) ) {
-			exit( 'No form data provided.' );
+			exit( '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert"><strong class="font-bold">Error!</strong><span class="block sm:inline"> No form data provided.</span></div>' );
 		}
 
 		parse_str( sanitize_text_field( $_POST['formData'] ), $form_fields);

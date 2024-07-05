@@ -124,7 +124,7 @@ class Shortcodes {
 	public static function search_table_data( $query ) {
 		// phpcs:disable
 		global $wpdb;
-		$sql = $wpdb->prepare( "SELECT * FROM %s WHERE name LIKE %s OR email LIKE %s", $wpdb->prefix . 'incsub_employees', '%' . $wpdb->esc_like( $query ) . '%', '%' . $wpdb->esc_like( $query ) . '%' );
+		$sql = $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}incsub_employees WHERE name LIKE %s OR email LIKE %s", '%' . $wpdb->esc_like( $query ) . '%', '%' . $wpdb->esc_like( $query ) . '%' );
 		return $wpdb->get_results( $sql );
         // phpcs:enable
 	}
@@ -137,7 +137,7 @@ class Shortcodes {
 	public static function get_table_data() {
 		// phpcs:disable
 		global $wpdb;
-		return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s", $wpdb->prefix . 'incsub_employees' ) );
+		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}incsub_employees" );
 		// phpcs:enable
 	}
 

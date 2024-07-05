@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-05T09:13:49+00:00\n"
+"POT-Creation-Date: 2024-07-05T13:09:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: incsub-employee-listing\n"
@@ -34,34 +34,34 @@ msgstr ""
 msgid "https://faisalshuvo.com"
 msgstr ""
 
-#: includes/EmployeeListing.php:143
-#: includes/Shortcodes.php:89
+#: includes/EmployeeListing.php:142
+#: includes/Shortcodes.php:90
 msgid "ID"
 msgstr ""
 
-#: includes/EmployeeListing.php:144
-#: includes/Shortcodes.php:90
+#: includes/EmployeeListing.php:143
+#: includes/Shortcodes.php:91
 msgid "Name"
 msgstr ""
 
-#: includes/EmployeeListing.php:145
-#: includes/Shortcodes.php:91
+#: includes/EmployeeListing.php:144
+#: includes/Shortcodes.php:92
 msgid "Email"
 msgstr ""
 
-#: includes/EmployeeListing.php:146
+#: includes/EmployeeListing.php:145
 #: includes/Shortcodes.php:46
-#: includes/Shortcodes.php:92
+#: includes/Shortcodes.php:93
 msgid "Designation"
 msgstr ""
 
-#: includes/EmployeeListing.php:147
+#: includes/EmployeeListing.php:146
 #: includes/Shortcodes.php:50
-#: includes/Shortcodes.php:93
+#: includes/Shortcodes.php:94
 msgid "Hire Date"
 msgstr ""
 
-#: includes/EmployeeListing.php:162
+#: includes/EmployeeListing.php:161
 msgid "No results found."
 msgstr ""
 
@@ -93,6 +93,6 @@ msgstr ""
 msgid "Un-serializing instances of this class is forbidden."
 msgstr ""
 
-#: incsub-employee-listing.php:64
+#: incsub-employee-listing.php:65
 msgid "Cannot initialize “Employee Listing” plugin. <code>vendor/autoload.php</code> is missing. Please run <code>composer dump-autoload -o</code> within the this plugin directory."
 msgstr ""

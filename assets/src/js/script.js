@@ -9,18 +9,14 @@ jQuery(document).ready(function($) {
 
         let data = {
             action: 'incsub_employee_search',
-            query: searchQuery
+            query: searchQuery,
+            nonce: incsub_ajax_object.ajax_nonce
         }
-
-        console.log( data );
 
         $.ajax({
             url: incsub_ajax_object.ajax_url,
             type: 'POST',
-            data: {
-                action: 'incsub_employee_search',
-                query: searchQuery
-            },
+            data: data,
             success: function(response) {
                 $('.employee-lists__wrap').html(response);
             }
@@ -41,7 +37,7 @@ jQuery(document).ready(function($) {
             data: {
                 action: 'incsub_submit_employee', // Action name to trigger the PHP function
                 formData: formData,
-                security: incsub_ajax_object.ajax_nonce // Nonce for security
+                nonce: incsub_ajax_object.ajax_nonce // Nonce for security
             },
             success: function(response) {
                 $('.form-message').html('<div class="mb-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert"><strong class="font-bold">Success!</strong><span class="block sm:inline"> ' + response + '</span></div>');
