@@ -6,15 +6,28 @@ use Incsub\EmployeeListing\Traits\Singleton;
 class Shortcodes {
 	use Singleton;
 
+	/**
+	 * Class Shortcodes constructor
+	 */
 	public function __construct() {
 		self::register();
 	}
 
+	/**
+     * Register new shortcodes
+     *
+	 * @return void
+	 */
 	public function register() {
 		add_shortcode( 'incsub_employee_form', [ $this, 'shortcode_form' ] );
 		add_shortcode( 'incsub_employee_list', [ $this, 'shortcode_list' ] );
 	}
 
+	/**
+     * Employee form shortcode callback
+     *
+	 * @return false|string
+	 */
 	public function shortcode_form() {
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' && !empty( $_POST['employee_name'] ) && !empty( $_POST['employee_email'] ) && !empty( $_POST['designation'] ) && !empty( $_POST['hire_date'] ) ) {
 			self::insert_data_to_table(
@@ -52,6 +65,11 @@ class Shortcodes {
 		return ob_get_clean();
 	}
 
+	/**
+     * Employee list shortcode callback
+     *
+	 * @return false|string
+	 */
 	public function shortcode_list() {
 		$data = self::get_table_data();
 		ob_start();
@@ -106,6 +124,13 @@ class Shortcodes {
 		return ob_get_clean();
 	}
 
+	/**
+     * Employee search form results
+     *
+	 * @param $query
+	 *
+	 * @return array|object|null
+	 */
 	public static function search_table_data( $query ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'incsub_employees';
@@ -113,12 +138,20 @@ class Shortcodes {
 		return $wpdb->get_results( $sql );
 	}
 
+	/**
+     * Get table data
+     *
+	 * @return array|object|null
+	 */
 	public static function get_table_data() {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'incsub_employees';
 		return $wpdb->get_results( "SELECT * FROM $table_name" );
 	}
 
+    /*
+     * Insert data into table
+     */
 	public static function insert_data_to_table( $name, $email, $designation, $hire_date ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'incsub_employees';
