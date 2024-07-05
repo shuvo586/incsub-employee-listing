@@ -48,10 +48,11 @@ if ( file_exists( INCSUB_EMPLOYEE_LISTING_DIR . '/vendor/autoload.php' ) ) {
 	/**
 	 * Plugin Initializer.
 	 */
-	function incsub_employee_listing_init() {
+	function incsub_employee_listing() {
 		Incsub\EmployeeListing\EmployeeListing::init();
 	}
-	add_action( 'plugins_loaded', 'incsub_employee_listing_init' );
+
+	add_action( 'plugins_loaded', 'incsub_employee_listing' );
 
 	register_activation_hook( INCSUB_EMPLOYEE_LISTING_FILE, array( 'Incsub\EmployeeListing\EmployeeListing', 'activate' ) );
 	register_deactivation_hook( INCSUB_EMPLOYEE_LISTING_FILE, array( 'Incsub\EmployeeListing\EmployeeListing', 'deactivate' ) );

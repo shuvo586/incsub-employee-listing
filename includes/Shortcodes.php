@@ -29,19 +29,11 @@ class Shortcodes {
 	 * @return false|string
 	 */
 	public function shortcode_form() {
-		if ( $_SERVER['REQUEST_METHOD'] === 'POST' && ! empty( $_POST['employee_name'] ) && ! empty( $_POST['employee_email'] ) && ! empty( $_POST['designation'] ) && ! empty( $_POST['hire_date'] ) ) {
-			self::insert_data_to_table(
-				sanitize_text_field( $_POST['employee_name'] ),
-				sanitize_email( $_POST['employee_email'] ),
-				sanitize_text_field( $_POST['designation'] ),
-				sanitize_text_field( $_POST['hire_date'] )
-			);
-		}
-
 		ob_start();
 		?>
 		<div class="bg-white p-4 rounded-lg shadow-lg">
-			<form method="POST" class="space-y-4">
+			<form id="employee-submit-form" method="POST" class="space-y-4">
+				<div class="form-message"></div>
 				<div>
 					<label for="employee_name" class="sr-only"><?php esc_html_e( 'Employee Name', 'incsub-employee-listing' ); ?></label>
 					<input type="text" id="employee_name" name="employee_name" required placeholder="Employee Name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -58,6 +50,7 @@ class Shortcodes {
 					<label for="hire_date" class="sr-only"><?php esc_html_e( 'Hire Date', 'incsub-employee-listing' ); ?></label>
 					<input type="date" id="hire_date" name="hire_date" required placeholder="Hire Date" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
 				</div>
+				<input type="hidden" name="incsub_nonce" value="<?php echo esc_attr( wp_create_nonce('incsub_nonce') ); ?>">
 				<input type="submit" value="Submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
 			</form>
 		</div>
@@ -84,13 +77,9 @@ class Shortcodes {
 				<?php else : ?>
 					<div class="mb-4">
 						<form id="employee-search-form" class="flex space-x-2">
-							<label for="employee-search"
-									class="sr-only"><?php esc_html_e( 'Search Employees', 'incsub-employee-listing' ); ?></label>
-							<input type="text" id="employee-search" name="employee_search"
-									placeholder="Search Employees"
-									class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-							<input type="submit" value="Search"
-									class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+							<label for="employee-search" class="sr-only"><?php esc_html_e( 'Search Employees', 'incsub-employee-listing' ); ?></label>
+							<input type="text" id="employee-search" name="employee_search" placeholder="Search Employees" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+							<input type="submit" value="Search" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
 						</form>
 					</div>
 					<div class="overflow-x-auto border">
@@ -132,10 +121,10 @@ class Shortcodes {
 	 * @return array|object|null
 	 */
 	public static function search_table_data( $query ) {
+		// phpcs:disable
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'incsub_employees';
-		$sql        = $wpdb->prepare( "SELECT * FROM $table_name WHERE name LIKE %s OR email LIKE %s", '%' . $wpdb->esc_like( $query ) . '%', '%' . $wpdb->esc_like( $query ) . '%' );
-		return $wpdb->get_results( $sql );
+		return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s WHERE name LIKE %s OR email LIKE %s", $wpdb->prefix . 'incsub_employees', '%' . $wpdb->esc_like( $query ) . '%', '%' . $wpdb->esc_like( $query ) . '%' ) );
+        // phpcs:enable
 	}
 
 	/**
@@ -144,19 +133,28 @@ class Shortcodes {
 	 * @return array|object|null
 	 */
 	public static function get_table_data() {
+		// phpcs:disable
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'incsub_employees';
-		return $wpdb->get_results( "SELECT * FROM $table_name" );
+		return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s", $wpdb->prefix . 'incsub_employees' ) );
+		// phpcs:enable
 	}
 
-	/*
+	/**
 	 * Insert data into table
+	 *
+	 * @param $name
+	 * @param $email
+	 * @param $designation
+	 * @param $hire_date
+	 *
+	 * @return bool|int|\mysqli_result|null
 	 */
-	public static function insert_data_to_table( $name, $email, $designation, $hire_date ) {
+	public static function insert_employee_data( $name, $email, $designation, $hire_date ) {
+
+        // phpcs:disable
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'incsub_employees';
-		$wpdb->insert(
-			$table_name,
+		return $wpdb->insert(
+			$wpdb->prefix . 'incsub_employees',
 			array(
 				'name'        => $name,
 				'email'       => $email,
@@ -164,5 +162,6 @@ class Shortcodes {
 				'hire_date'   => $hire_date,
 			)
 		);
+        // phpcs:enable
 	}
 }

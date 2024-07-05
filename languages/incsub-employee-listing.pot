@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-05T05:12:04+00:00\n"
+"POT-Creation-Date: 2024-07-05T09:13:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: incsub-employee-listing\n"
@@ -34,61 +34,65 @@ msgstr ""
 msgid "https://faisalshuvo.com"
 msgstr ""
 
-#: includes/EmployeeListing.php:127
-#: includes/Shortcodes.php:82
+#: includes/EmployeeListing.php:143
+#: includes/Shortcodes.php:89
 msgid "ID"
 msgstr ""
 
-#: includes/EmployeeListing.php:128
-#: includes/Shortcodes.php:83
+#: includes/EmployeeListing.php:144
+#: includes/Shortcodes.php:90
 msgid "Name"
 msgstr ""
 
-#: includes/EmployeeListing.php:129
-#: includes/Shortcodes.php:84
+#: includes/EmployeeListing.php:145
+#: includes/Shortcodes.php:91
 msgid "Email"
 msgstr ""
 
-#: includes/EmployeeListing.php:130
-#: includes/Shortcodes.php:41
-#: includes/Shortcodes.php:85
+#: includes/EmployeeListing.php:146
+#: includes/Shortcodes.php:46
+#: includes/Shortcodes.php:92
 msgid "Designation"
 msgstr ""
 
-#: includes/EmployeeListing.php:131
-#: includes/Shortcodes.php:45
-#: includes/Shortcodes.php:86
+#: includes/EmployeeListing.php:147
+#: includes/Shortcodes.php:50
+#: includes/Shortcodes.php:93
 msgid "Hire Date"
 msgstr ""
 
-#: includes/EmployeeListing.php:146
+#: includes/EmployeeListing.php:162
 msgid "No results found."
 msgstr ""
 
-#: includes/Shortcodes.php:33
+#: includes/Shortcodes.php:38
 msgid "Employee Name"
 msgstr ""
 
-#: includes/Shortcodes.php:37
+#: includes/Shortcodes.php:42
 msgid "Employee Email"
 msgstr ""
 
-#: includes/Shortcodes.php:63
+#: includes/Shortcodes.php:74
 msgid "Notice"
 msgstr ""
 
-#: includes/Shortcodes.php:64
+#: includes/Shortcodes.php:75
 msgid "There are no employees to display. Please use the form below to submit new employee information."
 msgstr ""
 
-#: includes/Shortcodes.php:70
+#: includes/Shortcodes.php:80
 msgid "Search Employees"
 msgstr ""
 
-#: includes/Traits/Singleton.php:44
+#: includes/Traits/Singleton.php:46
 msgid "Cloning is forbidden."
 msgstr ""
 
-#: includes/Traits/Singleton.php:51
+#: includes/Traits/Singleton.php:53
 msgid "Un-serializing instances of this class is forbidden."
+msgstr ""
+
+#: incsub-employee-listing.php:64
+msgid "Cannot initialize “Employee Listing” plugin. <code>vendor/autoload.php</code> is missing. Please run <code>composer dump-autoload -o</code> within the this plugin directory."
 msgstr ""
